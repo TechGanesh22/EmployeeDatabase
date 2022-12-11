@@ -1,0 +1,49 @@
+<%- include('partials/header') -%>
+    <!-- Navbar coding end -->
+    <!-- Coding for table  start -->
+
+    <div class="container my-4">
+        <%- include('partials/messages') -%>
+            <table class="table" id="myTable">
+                <thead>
+                    <tr>
+                        <th scope="col">Name</th>
+                        <th scope="col">Designation</th>
+                        <th scope="col">Salary</th>
+                        <th scope="col">Operations</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Here we fetch data from database and display in the screen start-->
+                    <% employees.forEach((employee)=>{%>
+                        <tr>
+                            <td>
+                                <%= employee.name %>
+                            </td>
+                            <td>
+                                <%= employee.designation %>
+                            </td>
+                            <td>
+                                <%= employee.salary %>
+                            </td>
+                            <td>
+                                <a href="/edit/<%= employee.id %>" class="btn btn-primary"
+                                    style="margin-right:3px">Edit</a>
+                                <form style="display:inline" action="/delete/<%= employee.id %>?_method=DELETE"
+                                    method="POST">
+                                    <input type="hidden" name="_method" value="DELETE">
+                                    <button style="cursor:pointer;" type="submit" class="btn btn-danger">Delete</button>
+                                </form>
+                            </td>
+                        </tr>
+                        <% })%>
+                </tbody>
+            </table>
+    </div>
+
+    <!-- Coding for table  end-->
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <%- include('partials/footer') -%>
