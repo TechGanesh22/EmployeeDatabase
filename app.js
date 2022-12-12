@@ -15,12 +15,17 @@ const employeeRoutes = require("./routes/employees");
 dotenv.config({ path: "./config.env" }); //here we use config.env path
 
 //This helps to connecting to mongoDB database
-mongoose.connect(process.env.DATABASE_LOCAL, {
-  // useNewUrlParser: true,
-  useUnifiedTopology: true,
-  // useCreateIndex: true,
-  // useFindAndModify: false,
-});
+mongoose
+  .connect(process.env.DATABASE_LOCAL, {
+    // useNewUrlParser: true,
+    useUnifiedTopology: true,
+    // useCreateIndex: true,
+    // useFindAndModify: false,
+  })
+  .then(() => {
+    console.log("Connection Successful");
+  })
+  .catch((err) => console.log("No Connection"));
 
 app.use(bodyParser.urlencoded({ extended: true })); //middleware for body parser
 app.set("views", path.join(__dirname, "views"));
@@ -51,3 +56,6 @@ const port = process.env.PORT;
 app.listen(port, () => {
   console.log("Server is started");
 });
+
+// DATABASE_LOCAL=mongodb+srv://Techganesh:ganesh@cluster0.kmtwsd3.mongodb.net/employees?retryWrites=true&w=majority
+// DATABASE_LOCAL=mongodb://localhost:27017/employees
